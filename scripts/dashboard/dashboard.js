@@ -1,19 +1,17 @@
 $(() => {
   localStorage.clear();
-  const update = async (chartComponent, cache) => {
-    const statsRes = selectedApp ? await axios.get(`/stats/application/${selectedApp}`) :
+  const update = async (chartComponent, cache, selectedApp) => {
+    const statsRes = selectedApp !== 'all' ? await axios.get(`/stats/application/${selectedApp}`) :
       await axios.get('/stats');
-    console.log(cache);
-    cache.addRecord(moment().unix(), statsRes.data);
-    chartComponent.updateCache(cache);
-    console.log(cache.connectionCache);
+    cache.addRecord(moment().unix(), { applicationId: selectedApp, stats: statsRes.data });
+    chartComponent.updateCache(cache.getRecords(selectedApp));
   };
 
-  let selectedApp = '';
+  let selectedApp = 'all';
   const connectionChartElement = $('#connection_chart');
-  const connectionCache = new ConnectionCache(200);
-  const chartComponent = new ChartComponent(connectionChartElement, connectionCache);
+  const connectionCache = new ConnectionCache(20);
+  const chartComponent = new ChartComponent(connectionChartElement, connectionCache.getRecords(selectedApp));
   update(chartComponent, connectionCache);
 
-  setInterval(() => update(chartComponent, connectionCache), 300);
+  setInterval(() => update(chartComponent, connectionCache, selectedApp), 5000);
 });

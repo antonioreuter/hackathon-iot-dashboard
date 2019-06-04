@@ -1,6 +1,6 @@
 class ConnectionCache {
   constructor(maxSize = 50) {
-    this.maxSize = 50;
+    this.maxSize = maxSize;
     this.connectionCache = localStorage.getItem('connectionCache') ?
       JSON.parse(localStorage.getItem('connectionCache')) : [];
   }
@@ -9,15 +9,14 @@ class ConnectionCache {
     if (this.connectionCache.length > this.maxSize) {
       this.connectionCache.shift(this.connectionCache.length - this.maxSize);
     }
-    console.log(this.connectionCache);
     this.connectionCache.push({
       timestamp, record
     });
     this.save();
   };
 
-  getRecords() {
-    return this.connectionCache;
+  getRecords(applicationGuid = 'all') {
+    return this.connectionCache.filter(d => d.record.applicationId === applicationGuid);
   }
 
   save() {
