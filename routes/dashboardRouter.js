@@ -3,6 +3,8 @@ const path = require('path');
 
 const ConnectionService = require('../src/services/connectionService');
 const ApplicationRepository = require('../src/repository/applicationRepository')
+const DeviceRepository = require('../src/repository/deviceRepository')
+
 
 const router = express.Router();
 
@@ -44,6 +46,12 @@ router.get('/application', async (req, res) => {
   res.send({
     applications
   });
+});
+
+router.get('/thingnames', async (req, res) => {
+  const deviceRepository = new DeviceRepository();
+  const thingNames = await deviceRepository.getAll();
+  res.send(thingNames);
 });
 
 module.exports = router;

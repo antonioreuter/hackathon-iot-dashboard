@@ -1,5 +1,10 @@
-$(() => {
+$(async () => {
   localStorage.clear();
+
+  const retrieveSelectedApp = () => {
+    const hash = location.hash ? location.hash.substring(1) : 'all';
+    return hash || 'all';
+  }
 
   const generateBreadcrumbs = (selectedApp) => {
     const appName = selectedApp === 'all' ? 'All applications' : selectedApp;
@@ -23,8 +28,8 @@ $(() => {
     `
   };
 
-  const updateOverviewBar = (overviewBar, selectedApp, lastElementCache) => {
-    overviewBar.html(`
+  const updateOverviewBar = (selectedApp, lastElementCache) => {
+    $('#overview_bar').html(`
       ${generateBreadcrumbs(selectedApp)}
       ${generateConnectionBar(lastElementCache)}
     `);
@@ -35,23 +40,23 @@ $(() => {
       await axios.get('/stats');
     cache.addRecord(moment().unix(), { applicationId: selectedApp, stats: statsRes.data });
     chartComponent.updateCache(cache.getRecords(selectedApp));
-    updateOverviewBar($('#overview_bar'), selectedApp, cache.getLastRecord(selectedApp));
+    updateOverviewBar(selectedApp, cache.getLastRecord(selectedApp));
   };
 
-  let selectedApp = location.hash ? location.hash.substring(1) : 'all';
+  let selectedApp = retrieveSelectedApp();
   const connectionChartElement = $('#connection_chart');
   const connectionCache = new ConnectionCache(20);
   const chartComponent = new ChartComponent(connectionChartElement, connectionCache.getRecords(selectedApp));
-  update(chartComponent, connectionCache, selectedApp);
+  await update(chartComponent, connectionCache, selectedApp);
 
   let interval = setInterval(() => update(chartComponent, connectionCache, selectedApp), 5000);
 
 
-  $(window).on('hashchange', () => {
+  $(window).on('hashchange', async () => {
     clearInterval(interval);
-    selectedApp = location.hash ? location.hash.substring(1) : 'all';
+    selectedApp = retrieveSelectedApp();
     console.log(selectedApp);
-    update(chartComponent, connectionCache, selectedApp);
+    await update(chartComponent, connectionCache, selectedApp);
     interval = setInterval(() => update(chartComponent, connectionCache, selectedApp), 5000);
   });
 });
