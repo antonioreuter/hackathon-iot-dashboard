@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const AWS = require('aws-sdk');
 
+const cloudwatchlogs = new AWS.CloudWatchLogs({apiVersion: '2014-03-28', region: 'eu-central-1'});
+
 const iot = new AWS.Iot({apiVersion: '2015-05-28', region: 'eu-central-1'});
 const iotdata = new AWS.IotData({
   endpoint: 'a1ge591avmlkp4-ats.iot.eu-central-1.amazonaws.com',
@@ -33,7 +35,7 @@ const addPrincipal = (thing) => {
     const principals = (data && data.principals) ? data.principals : [];
     thing.principals = principals.map(principal => principal.split(':').pop());
     return thing;
-  });
+  }).catch(() => thing);
 };
 
 
@@ -45,6 +47,9 @@ const addThingType = (thing) => {
     delete data.thingTypeArn;
     thing.thingType = data;
 
+    return thing;
+  }).catch(() => {
+    thing.thingType = {};
     return thing;
   });
 }
@@ -58,6 +63,9 @@ const addShadow = (thing) => {
     .then((data) => {
       thing.shadow = JSON.parse(data.payload);
 
+      return thing;
+    }).catch(() => {
+      thing.shadow = {};
       return thing;
     });
   }
@@ -101,6 +109,23 @@ router.get('/:deviceId', (req, res) => {
   .then(addShadow)
   .then(data => res.send(data))
   .catch(err => res.send({ message: err.message }));
+});
+
+
+router.get('/:deviceId/logs', (req, res) => {
+  const params = {
+    logGroupName: 'AWSIotLogsV2', /* required */
+    filterPattern: `{ $.clientId = ${req.params.deviceId} }`,
+    interleaved: true
+  };
+
+  return cloudwatchlogs.filterLogEvents(params).promise()
+    .then((data) => {
+      const logs = {};
+      logs.events = data.events;
+
+      return res.send(logs);
+    }).catch(err => res.send({ message: err.message}));
 });
 
 module.exports = router;
