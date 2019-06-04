@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 
 const dashboardRouter = require('./routes/dashboardRouter');
 const devicesRouter = require('./routes/devicesRouter');
+const viewsRouter = require('./routes/viewsRouter');
 
 const app = express();
 
@@ -13,7 +14,8 @@ app.use(bodyParser.json());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'pages')));
+app.use(express.static(path.join(__dirname, 'scripts')));
 
 // Make our db accessible to our router
 app.use((req,res,next) => {
@@ -21,6 +23,7 @@ app.use((req,res,next) => {
 });
 
 app.use('/', dashboardRouter);
+app.use('/', viewsRouter);
 app.use('/devices', devicesRouter);
 
 // catch 404 and forward to error handler
