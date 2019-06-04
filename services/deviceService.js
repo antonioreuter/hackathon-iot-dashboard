@@ -99,7 +99,6 @@ const addShadow = (thing) => {
     });
 };
 
-
 class DeviceService {
 
   findDevicesByThingGroup(thingGroupName) {
