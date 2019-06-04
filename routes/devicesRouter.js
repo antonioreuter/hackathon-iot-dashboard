@@ -37,9 +37,9 @@ router.get('/:deviceId/logs', (req, res) => {
 
 router.get('/:deviceId/detail', (req, res) => {
   console.log(`Loading device detail for: ${req.params.deviceId}`);
-  const device = deviceService.findDevice(req.params.deviceId);
-
-  res.render("device", { title: "Detail Device", device: device });
+  return deviceService.findDevice(req.params.deviceId).then((device) => {
+    res.render("device", { title: "Detail Device", device: device });
+  });
 });
 
 module.exports = router;
