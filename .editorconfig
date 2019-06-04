@@ -12,6 +12,6 @@ charset = utf-8
 indent_style = space
 indent_size = 4
 
-[*.{js,json}]
+[*.{js,html,json}]
 indent_style = space
 indent_size = 2

@@ -1,9 +1,14 @@
 var express = require('express');
+const path = require('path');
 
 const ConnectionService = require('../src/services/connectionService');
 const ApplicationRepository = require('../src/repository/applicationRepository')
 
 var router = express.Router();
+
+router.get('/', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../pages/dashboard.html'));
+});
 
 router.get('/stats', async (req, res) => {
   const connectionService = new ConnectionService();
