@@ -123,6 +123,18 @@ router.get('/:deviceId/jobsExecution', (req, res) => {
 });
 
 
+router.get('/:deviceId/jobsExecution', (req, res) => {
+  const params = {
+    thingName: req.params.deviceId
+  };
+
+  return iot.listJobExecutionsForThing(params).promise()
+    .then(data => res.send(data))
+    .catch(err => res.send({ message: err.message }));
+
+});
+
+
 router.get('/:deviceId/logs', (req, res) => {
   const params = {
     logGroupName: 'AWSIotLogsV2', /* required */
