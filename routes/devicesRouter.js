@@ -49,6 +49,7 @@ router.get('/:deviceId/logs', async (req, res) => {
 router.get('/:deviceId/detail', async (req, res) => {
   console.log(`Loading device detail for: ${req.params.deviceId}`);
   const device = await deviceService.findDevice(req.params.deviceId);
+  console.log(device);
   const jobs = await deviceService.findJobs(req.params.deviceId);
   const logs = await deviceService.findIoTLogs(req.params.deviceId);
 

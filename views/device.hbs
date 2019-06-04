@@ -1,97 +1,101 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-6">
-      <h1>Thing</h1>
-      <dl class="row">
-        <dt class="col-sm-3">Client Id</dt>
-        <dt class="col-sm-9">{{device.clientId}}</dt>
+<div class="row">
+  <div class="col-sm-6">
+    <h1>Thing</h1>
+    <dl class="row">
+      <dt class="col-sm-3">Client Id</dt>
+      <dt class="col-sm-9">{{device.clientId}}</dt>
 
-        <dt class="col-sm-3">Name</dt>
-        <dt class="col-sm-9">{{device.name}}</dt>
+      <dt class="col-sm-3">Name</dt>
+      <dt class="col-sm-9">{{device.name}}</dt>
 
-        <dt class="col-sm-3">Type</dt>
-        <dt class="col-sm-9">{{device.thingTypeName}}</dt>
+      <dt class="col-sm-3">Type</dt>
+      <dt class="col-sm-9">{{device.thingTypeName}}</dt>
 
-        <dt class="col-sm-3">Version</dt>
-        <dt class="col-sm-9">{{device.version}}</dt>
+      <dt class="col-sm-3">Version</dt>
+      <dt class="col-sm-9">{{device.version}}</dt>
 
-        <dt class="col-sm-3">Attributes:</dt>
-        <dt class="col-sm-9">
-          <p>
-            <ul class="list-group list-group-flush">
-              {{#each device.attributes}}
-              <li class="list-group-item">{{@key}}: {{this}}</li>
-              {{/each}}
-            </ul>
-          </p>
-        </dt>
-      </dl>
-    </div>
-    <div class="col-sm-6">
-      <h1>Shadow</h1>
-        <dl class="row">
-          <dt class="col-sm-3">State</dt>
-          <dt class="col-sm-9"><pre><code>{{toJSON device.shadow.state}}</code></pre></dt>
-
-          <dt class="col-sm-3">Metadata</dt>
-          <dt class="col-sm-9"><pre><code>{{toJSON device.shadow.metadata}}</code></pre></dt>
-
-          <dt class="col-sm-3">Version</dt>
-          <dt class="col-sm-9">{{device.shadow.version}}</dt>
-
-          <dt class="col-sm-3">Timestamp</dt>
-          <dt class="col-sm-9">{{device.shadow.timestamp}}</dt>
-        </dl>
-    </div>
+      <dt class="col-sm-3">Attributes:</dt>
+      <dt class="col-sm-9">
+        <p>
+          <ul class="list-group list-group-flush">
+            {{#each device.attributes}}
+            <li class="list-group-item">{{@key}}: {{this}}</li>
+            {{/each}}
+          </ul>
+        </p>
+      </dt>
+    </dl>
   </div>
+  <div class="col-sm-6">
+    <h1>Shadow</h1>
+    <dl class="row">
+      <dt class="col-sm-3">State</dt>
+      <dt class="col-sm-9">
+        <pre><code>{{toJSON device.shadow.state}}</code></pre>
+      </dt>
 
-  <div class="row">
-    <div class="col-sm-6">
-      <h1>Thing Groups</h1>
-      {{#each device.thingGroups}}
-      <dl class="row">
-        <dt class="col-sm-3">Group Id</dt>
-        <dt class="col-sm-9">{{thingGroupId}}</dt>
+      <dt class="col-sm-3">Metadata</dt>
+      <dt class="col-sm-9">
+        <pre><code>{{toJSON device.shadow.metadata}}</code></pre>
+      </dt>
 
-        <dt class="col-sm-3">Group Name</dt>
-        <dt class="col-sm-9">{{thingGroupName}}</dt>
+      <dt class="col-sm-3">Version</dt>
+      <dt class="col-sm-9">{{device.shadow.version}}</dt>
 
-        <dt class="col-sm-3">Parent Group Name</dt>
-        <dt class="col-sm-9">{{thingGroupMetadata.parentGroupName}}</dt>
-
-        <dt class="col-sm-3">Properties</dt>
-        <dt class="col-sm-9">
-          <p>
-            <ul class="list-group list-group-flush">
-              {{#each thingGroupProperties}}
-              <li class="list-group-item">{{@key}}: {{this}}</li>
-              {{/each}}
-            </ul>
-          </p>
-        </dt>
-      </dl>
-      {{/each}}
-    </div>
-    <div class="col-sm-6">
-      <h1>Thing Type</h1>
-      <dl class="row">
-        <dt class="col-sm-3">Thing Type Id</dt>
-        <dt class="col-sm-9">{{device.thingType.thingTypeId}}</dt>
-
-        <dt class="col-sm-3">Thing Type Name</dt>
-        <dt class="col-sm-9">{{device.thingType.thingTypeName}}</dt>
-
-        <dt class="col-sm-3">Properties</dt>
-        <dt class="col-sm-9">
-          <p>
-            <ul class="list-group list-group-flush">
-              {{#each device.thingType.thingTypeProperties}}
-              <li class="list-group-item">{{@key}}: {{this}}</li>
-              {{/each}}
-            </ul>
-          </p>
-        </dt>
-      </dl>
-    </div>
+      <dt class="col-sm-3">Timestamp</dt>
+      <dt class="col-sm-9">{{device.shadow.timestamp}}</dt>
+    </dl>
   </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-6">
+    <h1>Thing Groups</h1>
+    {{#each device.thingGroups}}
+    <dl class="row">
+      <dt class="col-sm-3">Group Id</dt>
+      <dt class="col-sm-9">{{thingGroupId}}</dt>
+
+      <dt class="col-sm-3">Group Name</dt>
+      <dt class="col-sm-9">{{thingGroupName}}</dt>
+
+      <dt class="col-sm-3">Parent Group Name</dt>
+      <dt class="col-sm-9">{{thingGroupMetadata.parentGroupName}}</dt>
+
+      <dt class="col-sm-3">Properties</dt>
+      <dt class="col-sm-9">
+        <p>
+          <ul class="list-group list-group-flush">
+            {{#each thingGroupProperties}}
+            <li class="list-group-item">{{@key}}: {{this}}</li>
+            {{/each}}
+          </ul>
+        </p>
+      </dt>
+    </dl>
+    {{/each}}
+  </div>
+  <div class="col-sm-6">
+    <h1>Thing Type</h1>
+    <dl class="row">
+      <dt class="col-sm-3">Thing Type Id</dt>
+      <dt class="col-sm-9">{{device.thingType.thingTypeId}}</dt>
+
+      <dt class="col-sm-3">Thing Type Name</dt>
+      <dt class="col-sm-9">{{device.thingType.thingTypeName}}</dt>
+
+      <dt class="col-sm-3">Properties</dt>
+      <dt class="col-sm-9">
+        <p>
+          <ul class="list-group list-group-flush">
+            {{#each device.thingType.thingTypeProperties}}
+            <li class="list-group-item">{{@key}}: {{this}}</li>
+            {{/each}}
+          </ul>
+        </p>
+      </dt>
+    </dl>
+  </div>
+</div>
+<div class="col-sm-6"></div>
 </div>

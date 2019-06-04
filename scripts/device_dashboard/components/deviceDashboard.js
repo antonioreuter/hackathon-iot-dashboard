@@ -22,9 +22,7 @@ class DeviceDashboard {
           <div class="card-body">
               <p class="card-text">${record.deviceName}</p>
               <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-outline-secondary">View</button>
-                </div>
+                <a href="/devices/${record.deviceName}/detail" class="btn btn-outline-secondary">View</a>
                 <div class="alert ${alertClass}" role="alert">
                   ${alertMessage}
                 </div>
