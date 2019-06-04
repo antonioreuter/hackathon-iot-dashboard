@@ -97,5 +97,65 @@
     </dl>
   </div>
 </div>
-<div class="col-sm-6"></div>
+
+<div class="row">
+  <div class="col-sm-6">
+    <h1>Principals</h1>
+    <p>
+      <ul class="list-group list-group-flush">
+        {{#each device.principals}}
+        <li class="list-group-item">{{this}}</li>
+        {{/each}}
+      </ul>
+    </p>
+  </div>
+  <div class="col-sm-6">
+    <h1>Jobs</h1>
+    <table class="table table-sm table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Job</th>
+          <th scope="col">Status</th>
+          <th scope="col">Started At</th>
+          <th scope="col">Queued At</th>
+          <th scope="col">Last Update At</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each jobs.executionSummaries}}
+          <tr>
+            <th scope="row">{{jobId}}</th>
+            <td>{{jobExecutionSummary.status}}</td>
+            <td>{{jobExecutionSummary.startedAt}}</td>
+            <td>{{jobExecutionSummary.queuedAt}}</td>
+            <td>{{jobExecutionSummary.lastUpdatedAt}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <h1>Logs</h1>
+      <table class="table table-sm table-hover">
+        <thead>
+          <tr>
+            <th scope="col">timestamp</th>
+            <th scope="col">log stream</th>
+            <th scope="col">message</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each logs.events}}
+          <tr>
+            <th scope="row">{{timestamp}}</th>
+            <td>{{logStreamName}}</td>
+            <td>{{message}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+  </div>
 </div>
