@@ -8,10 +8,9 @@
   <meta name="author" content="">
   <title>IoT Devices</title>
 
+
   <!-- Bootstrap core CSS -->
   <link href="./dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <link href="./assets/css/jquery.dynatable.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
   <link href="album.css" rel="stylesheet">
@@ -23,12 +22,13 @@
   <script src="./assets/js/vendor/popper.min.js"></script>
   <script src="./dist/js/bootstrap.min.js"></script>
   <script src="./assets/js/vendor/holder.min.js"></script>
-  <script src="./assets/js/vendor/jquery.dynatable.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 
   <script>
-    $(document).ready(function () {
+    $(document).ready(() => {
 
+      
       function splitIntoChunks(array, chunkSize = 3) {
         const result = [];
         for (let i = 0, j = array.length; i < j; i += chunkSize) {
@@ -38,88 +38,59 @@
         return result;
       }
 
-      function ulWriter(rowIndex, record, columns, cellWriter) {
-        var cssClass = "span4", li;
-        if (rowIndex % 3 === 0) { cssClass += ' first'; }
-
-        //li = '<li class="' + cssClass + '"><div class="thumbnail"><div class="thumbnail-image">' + record.band + '</div><div class="caption">' + record.song + '</div></div></li>';
-        li =
-          '<div class="col-md-4"><div class="card mb-4 box-shadow">' +
-          '<img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">' +
-          '<div class="card-body">' +
-          '<p class="card-text">' + record.band + '</p>' +
-          '<div class="d-flex justify-content-between align-items-center">' +
-          '<div class="btn-group">' +
-          '  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>' +
-          '  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>' +
-          '</div><small class="text-muted">9 mins</small></div></div></div></div>';
-
-        return li;
-      }
-
       function getDivForRecord(record) {
+        console.log('record: ' + record);
+
         const component = $('<div>').addClass('col-md-4')
           .html(`<div class="card mb-4 box-shadow">
-                  <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
                   <div class="card-body">
-                    <p class="card-text"> ${record.band} </p>
+                    <p class="card-text"> ${record.deviceName} </p>
                     <div class="d-flex justify-content-between align-items-center">
                       <div class="btn-group">
                         <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                       </div><small class="text-muted">9 mins</small></div></div></div>`);
         return component;
       }
 
-
-      function getDevices() {
-
-        /*
-        var result = [];
-
-        $.ajax({
-          url: "http://rest-service.guides.spring.io/greeting"
-        }).then(function(data) {
-          result.append(data);
-        });
-*/ 
-
-        return  [
-        {
-          "band": "Weezer",
-          "song": "El Scorcho"
-        },
-        {
-          "band": "Chevelle",
-          "song": "Family System"
-        },
-        {
-          "band": "New Kids on the block",
-          "song": "Family System"
-        },
-        {
-          "band": "NSync",
-          "song": "Family System"
-        }
-      ];
-
+      function param(name) {
+        return (location.search.split(name + '=')[1] || '').split('&')[0];
       }
 
-      var records = getDevices();
+      function getDevices(thingGroup) {
 
-      const recordChunks = splitIntoChunks(records, 4);
-      const rows = recordChunks.map(recordChunk => {
-        const row = $('<div>').addClass('row');
-        const components = recordChunk.map(record => getDivForRecord(record));
-        row.append(components);
-        return row;
+        return axios.get(`http://localhost:3000/devices?thingGroup=${thingGroup}`)
+          .then(function (response) {
+            const devices = response.data.map(element => {
+              var obj = {
+                deviceName: element
+              };
+              return obj;
+            });
+            return devices;
+          })
+          .catch(function (error) {
+            console.log(error);
+            return [];
+          });
+      }
+
+
+      getDevices('airpurifier').then((records) => {
+
+        console.log('records: ' + records);
+
+        const recordChunks = splitIntoChunks(records, 4);
+
+        const rows = recordChunks.map(recordChunk => {
+          const row = $('<div>').addClass('row');
+          const components = recordChunk.map(record => getDivForRecord(record));
+          row.append(components);
+          return row;
+        });
+
+        $('#device-list').append(rows);
+
       });
-      
-
-
-      //const deviceList = $('device-list').append(getDivForRecord($records[0]));
-      $('#device-list').append(rows);
-
     });
 
 
@@ -181,7 +152,7 @@
 
     </div>
     <!---->
-
+    <!--
     <div class="album py-5 bg-light">
       <div class="container">
 
@@ -234,10 +205,10 @@
               </div>
             </div>
           </div>
+-->
 
-
-        </div>
-      </div>
+    </div>
+    </div>
     </div>
 
   </main>
@@ -247,7 +218,7 @@
       <p class="float-right">
         <a href="#">Back to top</a>
       </p>
-      
+
     </div>
   </footer>
 </body>
