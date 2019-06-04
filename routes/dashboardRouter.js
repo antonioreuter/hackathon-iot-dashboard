@@ -5,7 +5,6 @@ const ConnectionService = require('../src/services/connectionService');
 const ApplicationRepository = require('../src/repository/applicationRepository')
 const DeviceRepository = require('../src/repository/deviceRepository')
 
-
 const router = express.Router();
 
 router.get('/stats', async (req, res) => {

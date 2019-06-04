@@ -36,11 +36,11 @@ $(async () => {
   }
 
   const update = async (chartComponent, cache, selectedApp) => {
+    updateOverviewBar(selectedApp, cache.getLastRecord(selectedApp));
     const statsRes = selectedApp !== 'all' ? await axios.get(`/stats/application/${selectedApp}`) :
       await axios.get('/stats');
     cache.addRecord(moment().unix(), { applicationId: selectedApp, stats: statsRes.data });
     chartComponent.updateCache(cache.getRecords(selectedApp));
-    updateOverviewBar(selectedApp, cache.getLastRecord(selectedApp));
   };
 
   let selectedApp = retrieveSelectedApp();
@@ -50,7 +50,6 @@ $(async () => {
   await update(chartComponent, connectionCache, selectedApp);
 
   let interval = setInterval(() => update(chartComponent, connectionCache, selectedApp), 5000);
-
 
   $(window).on('hashchange', async () => {
     clearInterval(interval);

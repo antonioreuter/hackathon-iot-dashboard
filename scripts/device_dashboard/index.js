@@ -31,6 +31,7 @@ $(async () => {
   };
 
   const update = async (dashboard, selectedApp) => {
+    updateOverviewBar(selectedApp);
     const records = await retrieveRecords(selectedApp);
     dashboard.update(records);
   };
@@ -38,6 +39,7 @@ $(async () => {
   let selectedApp = retrieveSelectedApp();
   const records = await retrieveRecords(selectedApp);
   const deviceDashboard = new DeviceDashboard($('#device_dashboard'), records);
+  updateOverviewBar(selectedApp);
   await update(deviceDashboard, selectedApp);
 
   $(window).on('hashchange', async () => {
