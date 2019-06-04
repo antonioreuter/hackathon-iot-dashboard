@@ -29,7 +29,7 @@ class ConnectionService {
     const applicationIds = ApplicationRepository.retrieveApplications();
     const applicationQuery = applicationIds.map(applicationId => `attributes.applicationGuid: ${applicationId}`)
       .join(' OR ');
-    const queryString = `connectivity.connected:true  ${applicationQuery}`;
+    const queryString = `connectivity.connected:true AND (${applicationQuery})`;
     const queryParams = {
       queryString
     };
