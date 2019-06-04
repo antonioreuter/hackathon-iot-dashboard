@@ -72,7 +72,19 @@
       }
 
 
-      var records = [
+      function getDevices() {
+
+        /*
+        var result = [];
+
+        $.ajax({
+          url: "http://rest-service.guides.spring.io/greeting"
+        }).then(function(data) {
+          result.append(data);
+        });
+*/ 
+
+        return  [
         {
           "band": "Weezer",
           "song": "El Scorcho"
@@ -91,6 +103,9 @@
         }
       ];
 
+      }
+
+      var records = getDevices();
 
       const recordChunks = splitIntoChunks(records, 4);
       const rows = recordChunks.map(recordChunk => {
