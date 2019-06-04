@@ -3,7 +3,13 @@ const express = require('express');
 const path = require('path');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
-const hbs = require('express-handlebars').create({ defaultLayout: 'index.hbs' });
+const hbs = require('express-handlebars')
+  .create({
+    defaultLayout: 'index.hbs',
+    helpers: {
+      toJSON: (data) => JSON.stringify(data)
+    }
+   });
 
 const dashboardRouter = require('./routes/dashboardRouter');
 const devicesRouter = require('./routes/devicesRouter');
