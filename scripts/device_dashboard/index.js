@@ -31,6 +31,7 @@ $(async () => {
   };
 
   const update = async (dashboard, selectedApp) => {
+    updateOverviewBar(selectedApp);
     const records = await retrieveRecords(selectedApp);
     dashboard.update(records);
   };
