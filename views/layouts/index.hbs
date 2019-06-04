@@ -10,14 +10,82 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+  <!-- Custom styles for this template -->
+  <link href="/style.css" rel="stylesheet">
+
   <title>{{title}}</title>
 </head>
 
 <body>
-  {{{body}}}
+  <div class="container-fluid">
+    <h1>Device detail</h1>
+    <div class="row" style="margin-top: 20px">
+      <div class="col-sm-2">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a href="/dashboard/#" class="nav-brand">Monitoring</a>
+          </li>
+          <li class="nav-item">
+            <a href="/dashboard/#airpurifier" class="nav-link">Air purifier</a>
+          </li>
+          <li class="nav-item">
+            <a href="/dashboard/#xray" class="nav-link">X-ray</a>
+          </li>
+          <li class="nav-item">
+            <a href="/dashboard/#light_bulb" class="nav-link">Light bulb</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-brand" href="/device_dashboard">Device management</a>
+          </li>
+          <li class="nav-item">
+            <a href="/device_dashboard/#airpurifier" class="nav-link">Air purifier</a>
+          </li>
+          <li class="nav-item">
+            <a href="/device_dashboard/#xray" class="nav-link">X-ray</a>
+          </li>
+          <li class="nav-item">
+            <a href="/device_dashboard/#light_bulb" class="nav-link">Light bulb</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-sm-10">
+        <div class="row">
+          <div class="col-sm-12">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">Philips</li>
+                <li class="breadcrumb-item">Hackathon</li>
+                <li class="breadcrumb-item">
+                  <a href="/device_dashboard/#{{device.attributes.applicationGuid}}">
+                    {{device.attributes.applicationGuid}}
+                  </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">{{device.clientId}}</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+        {{{body}}}
+      </div>
+    </div>
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.6/holder.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
 
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
