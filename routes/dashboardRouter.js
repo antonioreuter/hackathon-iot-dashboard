@@ -1,10 +1,11 @@
 var express = require('express');
 
 const ConnectionService = require('../src/services/connectionService');
+const ApplicationRepository = require('../src/repository/applicationRepository')
 
 var router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/stats', async (req, res) => {
   const connectionService = new ConnectionService();
   const [ numberOfDevices, numberOfConnectedDevices ] = await Promise.all([
     connectionService.countAllDevices(),
@@ -18,7 +19,7 @@ router.get('/', async (req, res) => {
   });
 });
 
-router.get('/application/:id', async (req, res) => {
+router.get('/stats/application/:id', async (req, res) => {
   const applicationGuid = req.params.id;
   const connectionService = new ConnectionService();
   const [ numberOfDevices, numberOfConnectedDevices ] = await Promise.all([
@@ -30,6 +31,17 @@ router.get('/application/:id', async (req, res) => {
       connectedDevices: numberOfConnectedDevices,
       disconnectedDevices: numberOfDevices - numberOfConnectedDevices
     }
+  });
+});
+
+router.get('/application', async (req, res) => {
+  const applications = ApplicationRepository.retrieveApplications().map(
+    application => ({
+      id: application
+    })
+  );
+  res.send({
+    applications
   });
 });
 

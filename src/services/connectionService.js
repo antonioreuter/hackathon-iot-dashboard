@@ -11,7 +11,7 @@ class ConnectionService {
   async countAllDevices(applicationId = '') {
     const applicationIds = applicationId ? [applicationId] : ApplicationRepository.retrieveApplications();
     const applicationQuery = applicationIds.map(applicationId => `attributes.applicationGuid: ${applicationId}`)
-      .join(' AND ');
+      .join(' OR ');
     const queryString = `${applicationQuery}`;
     const queryParams = {
       queryString
@@ -28,7 +28,7 @@ class ConnectionService {
   async countConnectedDevices() {
     const applicationIds = ApplicationRepository.retrieveApplications();
     const applicationQuery = applicationIds.map(applicationId => `attributes.applicationGuid: ${applicationId}`)
-      .join(' AND ');
+      .join(' OR ');
     const queryString = `connectivity.connected:true  ${applicationQuery}`;
     const queryParams = {
       queryString
