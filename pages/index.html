@@ -8,6 +8,7 @@
   <meta name="author" content="">
   <title>IoT Devices</title>
 
+  
   <!-- Bootstrap core CSS -->
   <link href="./dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -24,6 +25,7 @@
   <script src="./dist/js/bootstrap.min.js"></script>
   <script src="./assets/js/vendor/holder.min.js"></script>
   <script src="./assets/js/vendor/jquery.dynatable.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 
   <script>
@@ -74,36 +76,42 @@
 
       function getDevices() {
 
-        /*
         var result = [];
 
-        $.ajax({
-          url: "http://rest-service.guides.spring.io/greeting"
-        }).then(function(data) {
-          result.append(data);
-        });
-*/ 
+        //
 
-        return  [
-        {
-          "band": "Weezer",
-          "song": "El Scorcho"
-        },
-        {
-          "band": "Chevelle",
-          "song": "Family System"
-        },
-        {
-          "band": "New Kids on the block",
-          "song": "Family System"
-        },
-        {
-          "band": "NSync",
-          "song": "Family System"
-        }
-      ];
+        /*
+          console.log(response);
 
+          response.forEach(element => {
+            
+            var obj = { band:   element,
+              song: 'song'};
+            
+            result.append(obj);
+        */
+
+        var config = {
+          headers: {'Access-Control-Allow-Origin': '*'}
+        };
+        axios.get('http://localhost:3000/devices?thingGroup=airpurifier', config, {
+          params: {
+            ID: 12345
+          }
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
+        .then(function () {
+          // always executed
+        });  
+        
+        return result;
       }
+
 
       var records = getDevices();
 
