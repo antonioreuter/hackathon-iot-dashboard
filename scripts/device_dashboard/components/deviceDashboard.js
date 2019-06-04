@@ -14,6 +14,8 @@ class DeviceDashboard {
   }
 
   generateDeviceComponent(record) {
+    const alertClass = record.isConnected ? 'alert-success' : 'alert-danger';
+    const alertMessage = record.isConnected ? 'Connected' : 'Disconnected';
     const component = $('<div>').addClass('col-sm-4')
       .html(`
         <div class="card mb-4 box-shadow">
@@ -21,7 +23,10 @@ class DeviceDashboard {
               <p class="card-text">${record.deviceName}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-outline-secondary">View</button>
+                </div>
+                <div class="alert ${alertClass}" role="alert">
+                  ${alertMessage}
                 </div>
               </div>
             </div>

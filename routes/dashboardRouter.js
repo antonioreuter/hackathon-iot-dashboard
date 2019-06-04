@@ -37,6 +37,15 @@ router.get('/stats/application/:id', async (req, res) => {
   });
 });
 
+router.get('/stats/thing/:id', async (req, res) => {
+  const thingId = req.params.id;
+  const connectionService = new ConnectionService();
+  const connectionStatus = await connectionService.isDeviceConnected(thingId);
+  res.send({
+    isConnected: connectionStatus
+  })
+});
+
 router.get('/application', async (req, res) => {
   const applications = ApplicationRepository.retrieveApplications().map(
     application => ({

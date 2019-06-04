@@ -1,5 +1,4 @@
 class DeviceRepository {
-
   async getDevicesByApplication(applicationId = 'all') {
     try {
       const response = applicationId === 'all' ?
@@ -7,7 +6,14 @@ class DeviceRepository {
       if (response.data.message) {
         return [];
       }
-      return response.data.map(deviceName => ({ deviceName }));
+      const connectionStatusReq = response.data.map(async (deviceName) => {
+        const stats = await axios.get(`/stats/thing/${deviceName}`).data || {};
+        return {
+          deviceName,
+          isConnected: stats.isConnected
+        }
+      });
+      return Promise.all(connectionStatusReq);
     } catch (err) {
       console.error(err);
       return [];
