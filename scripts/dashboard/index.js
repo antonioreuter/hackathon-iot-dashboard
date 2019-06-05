@@ -49,13 +49,13 @@ $(async () => {
   const chartComponent = new ChartComponent(connectionChartElement, connectionCache.getRecords(selectedApp));
   await update(chartComponent, connectionCache, selectedApp);
 
-  let interval = setInterval(() => update(chartComponent, connectionCache, selectedApp), 5000);
+  let interval = setInterval(() => update(chartComponent, connectionCache, selectedApp), 2000);
 
   $(window).on('hashchange', async () => {
     clearInterval(interval);
     selectedApp = retrieveSelectedApp();
     console.log(selectedApp);
     await update(chartComponent, connectionCache, selectedApp);
-    interval = setInterval(() => update(chartComponent, connectionCache, selectedApp), 5000);
+    interval = setInterval(() => update(chartComponent, connectionCache, selectedApp), 2000);
   });
 });

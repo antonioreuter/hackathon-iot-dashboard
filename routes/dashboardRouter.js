@@ -42,7 +42,7 @@ router.get('/stats/thing/:id', async (req, res) => {
   const connectionStatus = await connectionService.isDeviceConnected(thingId);
   res.send({
     isConnected: connectionStatus
-  })
+  });
 });
 
 router.get('/application', async (req, res) => {
