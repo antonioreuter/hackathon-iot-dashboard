@@ -26,7 +26,7 @@ router.get('/stats/application/:id', async (req, res) => {
   const connectionService = new ConnectionService();
   const [ numberOfDevices, numberOfConnectedDevices ] = await Promise.all([
     connectionService.countAllDevices(applicationGuid),
-    connectionService.countConnectedDevices(applicationGuid)
+    connectionService.countConnectedDevicesByApp(applicationGuid)
   ]);
   res.send({
     statistics: {
@@ -42,7 +42,7 @@ router.get('/stats/thing/:id', async (req, res) => {
   const connectionStatus = await connectionService.isDeviceConnected(thingId);
   res.send({
     isConnected: connectionStatus
-  })
+  });
 });
 
 router.get('/application', async (req, res) => {

@@ -1,4 +1,29 @@
 body {
-    padding: 20px;
+    padding: 0;
+    margin: 0;
     overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: #eee;
+    height: 100%;
+}
+
+.container-fluid {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.row:first {
+    margin: 0;
+    padding: 0;
+}
+
+ul.nav {
+    box-sizing: border-box;
+    padding: 20px;
+    height: 100vh;
+}
+
+h1 {
+    padding-top: 20px;
 }

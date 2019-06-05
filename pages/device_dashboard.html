@@ -20,8 +20,7 @@
 
 <body>
     <div class="container-fluid">
-        <h1>Device management</h1>
-        <div class="row" style="margin-top: 20px">
+        <div class="row">
           <div class="col-sm-2">
             <ul class="nav flex-column">
                 <li class="nav-item">
@@ -51,13 +50,17 @@
               </ul>
           </div>
           <div class="col-sm-10">
+            <h1>Device management</h1>
             <div class="row">
-              <div class="col-sm-12">
+              <div class="col-sm-11">
                 <div class="row">
-                  <div id="overview_bar"></div>
+                  <div class="col-sm-10"><div id="overview_bar"></div></div>
+                  <div class="col-sm-2">
+                    <button id="refresh_button" role="button" class="btn btn-outline-dark">Refresh</button>
+                  </div>
                 </div>
                 <div class="row">
-                  <div id="device_dashboard" class="col-sm-12"></div>
+                  <div id="device_dashboard" class="col-sm-11"></div>
                 </div>
               </div>
             </div>

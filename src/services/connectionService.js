@@ -65,6 +65,7 @@ class ConnectionService {
     };
     try {
       const stats = await this.iot.getStatistics(queryParams).promise();
+      console.log('Connect ', hsdpId, stats.statistics.count);
       return stats.statistics.count > 0;
     } catch (err) {
       console.log(err);

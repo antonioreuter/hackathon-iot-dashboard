@@ -42,6 +42,10 @@ $(async () => {
   updateOverviewBar(selectedApp);
   await update(deviceDashboard, selectedApp);
 
+  $('#refresh_button').on('click', async () => {
+    await update(deviceDashboard, selectedApp);
+  });
+
   $(window).on('hashchange', async () => {
     selectedApp = retrieveSelectedApp();
     console.log(selectedApp);

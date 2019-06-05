@@ -36,7 +36,7 @@ class DeviceDashboard {
   generateRows(records) {
     this.container.empty();
 
-    const recordChunks = splitIntoChunks(records, 4);
+    const recordChunks = splitIntoChunks(records, 3);
 
     const rows = recordChunks.map(recordChunk => {
       const row = $('<div>').addClass('row');

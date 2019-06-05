@@ -7,7 +7,9 @@ class DeviceRepository {
         return [];
       }
       const connectionStatusReq = response.data.map(async (deviceName) => {
-        const stats = await axios.get(`/stats/thing/${deviceName}`).data || {};
+        const connectionStats = await axios.get(`/stats/thing/${deviceName}`);
+        const stats = connectionStats.data || { isConnected: false };
+        console.log(stats);
         return {
           deviceName,
           isConnected: stats.isConnected

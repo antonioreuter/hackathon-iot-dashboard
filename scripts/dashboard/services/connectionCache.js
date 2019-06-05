@@ -14,6 +14,7 @@ class ConnectionCache {
     this.connectionCache.push({
       timestamp, record
     });
+    console.log(this.connectionCache);
     this.save();
   };
 
