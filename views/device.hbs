@@ -1,0 +1,98 @@
+<div class="row">
+  <div class="col-sm-6">
+    <ul class="nav nav-tabs" id="device-tab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="general-tab" data-toggle="tab" href="#general" role="tab" aria-controls="general"
+          aria-selected="true">General</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="thing-type-tab" data-toggle="tab" href="#thing-type" role="tab"
+          aria-controls="thing-type" aria-selected="false">Thing type</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="thing-group-tab" data-toggle="tab" href="#thing-group" role="tab"
+          aria-controls="thing-group" aria-selected="false">Thing groups</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="shadow-tab" data-toggle="tab" href="#shadow" role="tab" aria-controls="shadow"
+          aria-selected="false">Shadow</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="principal-tab" data-toggle="tab" href="#principal" role="tab" aria-controls="principal"
+          aria-selected="false">Principals</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="job-tab" data-toggle="tab" href="#job" role="tab" aria-controls="job"
+          aria-selected="false">Jobs</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="log-tab" data-toggle="tab" href="#log" role="tab" aria-controls="log"
+          aria-selected="false">Logs</a>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane fade show active" role="tabpanel" id="general" aria-labelledby="general-tab">
+        <dl class="row">
+            <dt class="col-sm-3">Client Id</dt>
+            <dd class="col-sm-9">{{device.clientId}}</dd>
+
+            <dt class="col-sm-3">Name</dt>
+            <dd class="col-sm-9">{{device.name}}</dd>
+
+            <dt class="col-sm-3">Type</dt>
+            <dd class="col-sm-9">{{device.thingTypeName}}</dd>
+
+            <dt class="col-sm-3">Version</dt>
+            <dd class="col-sm-9">{{device.version}}</dd>
+
+            <dt class="col-sm-3">Attributes</dt>
+            <dd class="col-sm-9">
+              <dl class="row">
+                <dl class="row">
+                  {{#each device.attributes}}
+                  <dt class="col-sm-4">{{@key}}</dt>
+                  <dd class="col-sm-8">{{this}}</dd>
+                  {{/each}}
+                </dl>
+              </dl>
+            </dd>
+          </dl>
+      </div>
+      <div class="tab-pane fade show active" role="tabpanel" id="thing-type" aria-labelledby="thing-type-tab"></div>
+      <div class="tab-pane fade show active" role="tabpanel" id="thing-group" aria-labelledby="thing-group-tab">
+        {{#each device.thingGroups}}
+        <dl class="row">
+          <dt class="col-sm-3">Group Id</dt>
+          <dd class="col-sm-9">{{thingGroupId}}</dd>
+
+          <dt class="col-sm-3">Group Name</dt>
+          <dd class="col-sm-9">{{thingGroupName}}</dd>
+
+          <dt class="col-sm-3">Parent Group Name</dt>
+          <dd class="col-sm-9">{{thingGroupMetadata.parentGroupName}}</dd>
+
+          <dt class="col-sm-3">Properties</dt>
+          <dd class="col-sm-9">
+            <dl class="row">
+              {{#each thingGroupProperties}}
+              <dt class="list-group-item">{{@key}}</dt>
+              <dd>{{this}}</dd>
+              {{/each}}
+            </dl>
+          </dd>
+        </dl>
+        {{/each}}
+      </div>
+      <div class="tab-pane fade show active" role="tabpanel" id="shadow" aria-labelledby="shadow-tab">
+        <pre>
+          {{toJSON device.shadow}}
+        </pre>
+      </div>
+      <div class="tab-pane fade show active" role="tabpanel" id="principal" aria-labelledby="principal-tab">
+
+      </div>
+      <div class="tab-pane fade show active" role="tabpanel" id="job" aria-labelledby="job-tab"></div>
+      <div class="tab-pane fade show active" role="tabpanel" id="log" aria-labelledby="log-tab"></div>
+    </div>
+</div>

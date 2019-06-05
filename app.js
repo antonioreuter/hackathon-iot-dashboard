@@ -3,6 +3,13 @@ const express = require('express');
 const path = require('path');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
+const hbs = require('express-handlebars')
+  .create({
+    defaultLayout: 'index.hbs',
+    helpers: {
+      toJSON: (data) => JSON.stringify(data)
+    }
+   });
 
 const dashboardRouter = require('./routes/dashboardRouter');
 const devicesRouter = require('./routes/devicesRouter');
@@ -16,6 +23,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'pages')));
 app.use(express.static(path.join(__dirname, 'scripts')));
+
+app.set("views", path.join(__dirname, "views"));
+app.engine('hbs', hbs.engine);
+app.set('view engine', 'hbs');
 
 // Make our db accessible to our router
 app.use((req,res,next) => {

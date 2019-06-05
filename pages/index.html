@@ -2,225 +2,89 @@
 <html lang="en">
 
 <head>
+  <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <title>IoT Devices</title>
 
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="/style.css" rel="stylesheet">
+  <title>Device dashboard</title>
 
-  <!-- Bootstrap core CSS -->
-  <link href="./dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    canvas {
+      display: block;
+      width: 100%;
+    }
 
-  <!-- Custom styles for this template -->
-  <link href="album.css" rel="stylesheet">
-
-  <!-- Bootstrap core JavaScript
-    ================================================== -->
-  <!-- Placed at the end of the document so the pages load faster -->
-  <script src="./assets/js/vendor/jquery-slim.min.js"></script>
-  <script src="./assets/js/vendor/popper.min.js"></script>
-  <script src="./dist/js/bootstrap.min.js"></script>
-  <script src="./assets/js/vendor/holder.min.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-
-  <script>
-    $(document).ready(() => {
-
-      
-      function splitIntoChunks(array, chunkSize = 3) {
-        const result = [];
-        for (let i = 0, j = array.length; i < j; i += chunkSize) {
-          const temparray = array.slice(i, i + chunkSize);
-          result.push(temparray);
-        }
-        return result;
-      }
-
-      function getDivForRecord(record) {
-        console.log('record: ' + record);
-
-        const component = $('<div>').addClass('col-md-4')
-          .html(`<div class="card mb-4 box-shadow">
-                  <div class="card-body">
-                    <p class="card-text"> ${record.deviceName} </p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      </div><small class="text-muted">9 mins</small></div></div></div>`);
-        return component;
-      }
-
-      function param(name) {
-        return (location.search.split(name + '=')[1] || '').split('&')[0];
-      }
-
-      function getDevices(thingGroup) {
-
-        return axios.get(`http://localhost:3000/devices?thingGroup=${thingGroup}`)
-          .then(function (response) {
-            const devices = response.data.map(element => {
-              var obj = {
-                deviceName: element
-              };
-              return obj;
-            });
-            return devices;
-          })
-          .catch(function (error) {
-            console.log(error);
-            return [];
-          });
-      }
-
-
-      getDevices('airpurifier').then((records) => {
-
-        console.log('records: ' + records);
-
-        const recordChunks = splitIntoChunks(records, 4);
-
-        const rows = recordChunks.map(recordChunk => {
-          const row = $('<div>').addClass('row');
-          const components = recordChunk.map(record => getDivForRecord(record));
-          row.append(components);
-          return row;
-        });
-
-        $('#device-list').append(rows);
-
-      });
-    });
-
-
-  </script>
+    #connection_chart {
+      box-sizing: border-box;
+      width: 100%;
+      height: 500px;
+    }
+  </style>
 </head>
 
 <body>
-
-  <header>
-    <div class="collapse bg-dark" id="navbarHeader">
-      <div class="container">
+  <div class="container-fluid">
+    <h1>Monitor connections</h1>
+    <div class="row" style="margin-top: 20px">
+      <div class="col-sm-2">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+              <a href="/dashboard/#" class="nav-brand">Monitoring</a>
+            </li>
+            <li class="nav-item">
+              <a href="/dashboard/#airpurifier" class="nav-link">Air purifier</a>
+            </li>
+            <li class="nav-item">
+              <a href="/dashboard/#xray" class="nav-link">X-ray</a>
+            </li>
+            <li class="nav-item">
+              <a href="/dashboard/#light_bulb" class="nav-link">Light bulb</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-brand" href="/device_dashboard">Device management</a>
+            </li>
+            <li class="nav-item">
+                <a href="/device_dashboard/#airpurifier" class="nav-link">Air purifier</a>
+              </li>
+              <li class="nav-item">
+                <a href="/device_dashboard/#xray" class="nav-link">X-ray</a>
+              </li>
+              <li class="nav-item">
+                <a href="/device_dashboard/#light_bulb" class="nav-link">Light bulb</a>
+              </li>
+          </ul>
+      </div>
+      <div class="col-sm-10">
         <div class="row">
-          <div class="col-sm-8 col-md-7 py-4">
-            <h4 class="text-white">About</h4>
-            <p class="text-muted">IoT Devices - Hackathon.</p>
-          </div>
-          <div class="col-sm-4 offset-md-1 py-4">
-            <h4 class="text-white">Contact</h4>
-          </div>
+          <div id="overview_bar"></div>
+          <div id="connection_chart"></div>
+          <div id="application_menu"></div>
         </div>
       </div>
     </div>
-    <div class="navbar navbar-dark bg-dark box-shadow">
-      <div class="container d-flex justify-content-between">
-        <a href="#" class="navbar-brand d-flex align-items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
-            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
-            <circle cx="12" cy="13" r="4"></circle>
-          </svg>
-          <strong>IoT Devices</strong>
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader"
-          aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      </div>
-    </div>
-  </header>
+  </div>
 
-  <main role="main">
-
-    <section class="jumbotron text-center">
-      <div class="container">
-        <h1 class="jumbotron-heading">Devices</h1>
-        <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator,
-          etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
-        <p>
-          <a href="#" class="btn btn-primary my-2">Main call to action</a>
-          <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-        </p>
-      </div>
-    </section>
-
-
-
-    <!--  -->
-    <div id="device-list">
-
-    </div>
-    <!---->
-    <!--
-    <div class="album py-5 bg-light">
-      <div class="container">
-
-        <div class="row">
-          <div class="col-md-4">
-            <div class="card mb-4 box-shadow">
-              <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail"
-                alt="Card image cap">
-              <div class="card-body">
-                <p class="card-text">Device info</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  <small class="text-muted">9 mins</small>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card mb-4 box-shadow">
-              <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail"
-                alt="Card image cap">
-              <div class="card-body">
-                <p class="card-text">Device info</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  <small class="text-muted">9 mins</small>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card mb-4 box-shadow">
-              <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail"
-                alt="Card image cap">
-              <div class="card-body">
-                <p class="card-text">Device info</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                  </div>
-                  <small class="text-muted">9 mins</small>
-                </div>
-              </div>
-            </div>
-          </div>
--->
-
-    </div>
-    </div>
-    </div>
-
-  </main>
-
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-right">
-        <a href="#">Back to top</a>
-      </p>
-
-    </div>
-  </footer>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src="/dashboard/services/connectionCache.js"></script>
+  <script src="/dashboard/components/chartComponent.js"></script>
+  <script src="/dashboard/index.js"></script>
 </body>
 
 </html>

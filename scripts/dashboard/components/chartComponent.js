@@ -17,7 +17,7 @@ class ChartComponent {
   cacheToDataset() {
     const records = [...this.cache];
     const data = records.map(record => record.record.stats.statistics.connectedDevices);
-    const labels = records.map(record => record.timestamp);
+    const labels = records.map(record => moment.unix(record.timestamp).format('HH:mm:ss'));
     return {
       data,
       labels
@@ -27,6 +27,9 @@ class ChartComponent {
   retrieveChartConfig() {
     const options = {
       responsive: true,
+      legend: {
+        display: false
+      },
       title: {
         display: true,
         text: 'Connections'
@@ -36,18 +39,15 @@ class ChartComponent {
         intersect: true
       },
       scales: {
-        xAxes: [{
-          display: true,
-          scaleLabel: {
-            display: true,
-            labelString: 'Timestamp'
-          }
-        }],
         yAxes: [{
           display: true,
           scaleLabel: {
             display: true,
-            labelString: 'Number of connected devices'
+            labelString: 'Number of connected devices',
+          },
+          ticks: {
+            suggestedMin: 0,
+            suggestedMax: 100
           }
         }]
       }
