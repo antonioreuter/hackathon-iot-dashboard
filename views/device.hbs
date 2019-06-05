@@ -1,273 +1,271 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-12">
-      <ul class="nav nav-tabs" id="device-tab" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link active" id="general-tab" data-toggle="tab" href="#general" role="tab"
-            aria-controls="general" aria-selected="true">General</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="thing-type-tab" data-toggle="tab" href="#thing-type" role="tab"
-            aria-controls="thing-type" aria-selected="false">Thing type</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="thing-group-tab" data-toggle="tab" href="#thing-group" role="tab"
-            aria-controls="thing-group" aria-selected="false">Thing groups</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="shadow-tab" data-toggle="tab" href="#shadow" role="tab" aria-controls="shadow"
-            aria-selected="false">Shadow</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="principal-tab" data-toggle="tab" href="#principal" role="tab"
-            aria-controls="principal" aria-selected="false">Principals</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="job-tab" data-toggle="tab" href="#job" role="tab" aria-controls="job"
-            aria-selected="false">Jobs</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="log-tab" data-toggle="tab" href="#log" role="tab" aria-controls="log"
-            aria-selected="false">Logs</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="properties-tab" data-toggle="tab" href="#properties" role="tab"
-            aria-controls="properties" aria-selected="false">Properties</a>
-        </li>
-      </ul>
+<div class="row">
+  <div class="col-sm-12">
+    <ul class="nav nav-tabs" id="device-tab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="general-tab" data-toggle="tab" href="#general" role="tab"
+          aria-controls="general" aria-selected="true">General</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="thing-type-tab" data-toggle="tab" href="#thing-type" role="tab"
+          aria-controls="thing-type" aria-selected="false">Thing type</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="thing-group-tab" data-toggle="tab" href="#thing-group" role="tab"
+          aria-controls="thing-group" aria-selected="false">Thing groups</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="shadow-tab" data-toggle="tab" href="#shadow" role="tab" aria-controls="shadow"
+          aria-selected="false">Shadow</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="principal-tab" data-toggle="tab" href="#principal" role="tab"
+          aria-controls="principal" aria-selected="false">Principals</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="job-tab" data-toggle="tab" href="#job" role="tab" aria-controls="job"
+          aria-selected="false">Jobs</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="log-tab" data-toggle="tab" href="#log" role="tab" aria-controls="log"
+          aria-selected="false">Logs</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="properties-tab" data-toggle="tab" href="#properties" role="tab"
+          aria-controls="properties" aria-selected="false">Properties</a>
+      </li>
+    </ul>
 
-      <div class="tab-content">
-        <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-sm-6">
-                <dl class="row">
-                  <dt class="col-sm-3">Client Id</dt>
-                  <dd class="col-sm-8">{{device.clientId}}</dd>
+    <div class="tab-content" style="margin-top: 30px">
+      <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
+        <div>
+          <div class="row">
+            <div class="col-sm-6">
+              <dl class="row">
+                <dt class="col-sm-3">Client Id</dt>
+                <dd class="col-sm-8">{{device.clientId}}</dd>
 
-                  <dt class="col-sm-3">Name</dt>
-                  <dd class="col-sm-9">{{device.name}}</dd>
+                <dt class="col-sm-3">Name</dt>
+                <dd class="col-sm-9">{{device.name}}</dd>
 
-                  <dt class="col-sm-3">Type</dt>
-                  <dd class="col-sm-9">{{device.thingTypeName}}</dd>
+                <dt class="col-sm-3">Type</dt>
+                <dd class="col-sm-9">{{device.thingTypeName}}</dd>
 
-                  <dt class="col-sm-3">Version</dt>
-                  <dd class="col-sm-9">{{device.version}}</dd>
-                </dl>
-              </div>
+                <dt class="col-sm-3">Version</dt>
+                <dd class="col-sm-9">{{device.version}}</dd>
+              </dl>
             </div>
           </div>
         </div>
-
-        <div class="tab-pane fade show" id="thing-type" role="tabpanel" aria-labelledby="thing-type-tab">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-sm-6">
-                <dl class="row">
-                  <dt class="col-sm-3">Id</dt>
-                  <dd class="col-sm-8">{{device.thingType.thingTypeId}}</dd>
-
-                  <dt class="col-sm-3">Name</dt>
-                  <dd class="col-sm-9">{{device.thingType.thingTypeName}}</dd>
-
-                  <dt class="col-sm-3">Description</dt>
-                  <dd class="col-sm-9">{{device.thingType.thingTypeProperties.thingTypeDescription}}</dd>
-
-                  <dt class="col-sm-3">Created at</dt>
-                  <dd class="col-sm-9">{{device.thingType.thingTypeMetadata.creationDate}}</dd>
-                </dl>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="tab-pane fade show" id="thing-group" role="tabpanel" aria-labelledby="thing-group-tab">
-          <div class="container-fluid">
-            {{#each device.thingGroups}}
-            <div class="row">
-              <div class="col-sm-6">
-                <dl class="row">
-                  <dt class="col-sm-4">Id</dt>
-                  <dd class="col-sm-8">{{thingGroupId}}</dd>
-
-                  <dt class="col-sm-4">Name</dt>
-                  <dd class="col-sm-8">{{thingGroupName}}</dd>
-
-                  <dt class="col-sm-4">Description</dt>
-                  <dd class="col-sm-8">{{thingGroupProperties.thingGroupDescription}}</dd>
-
-                  <dt class="col-sm-4">Parent Group</dt>
-                  <dd class="col-sm-8">{{thingGroupMetadata.parentGroupName}}</dd>
-
-                  <dt class="col-sm-4">Created at</dt>
-                  <dd class="col-sm-8">{{thingGroupMetadata.creationDate}}</dd>
-
-                  <dt class="col-sm-4">Parent Thing Groups</dt>
-                  <dd class="col-sm-8">
-                    {{#each thingGroupMetadata.rootToParentThingGroups}}
-                    <span class="badge badge-pill badge-primary">{{groupName}}</span>
-                    {{/each}}
-                  </dd>
-                </dl>
-              </div>
-            </div>
-            {{/each}}
-          </div>
-        </div>
-
-        <div class="tab-pane fade show" id="shadow" role="tabpanel" aria-labelledby="shadow-tab">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-sm-6">
-                <dl class="row">
-                  <dt class="col-sm-4">State</dt>
-                  <dd class="col-sm-8">
-                    <pre><code>{{toJSON device.shadow.state}}</code></pre>
-                  </dd>
-
-                  <dt class="col-sm-4">Metadata</dt>
-                  <dd class="col-sm-8">
-                    <pre><code>{{toJSON device.shadow.metadata}}</code></pre>
-                  </dd>
-
-                  <dt class="col-sm-4">Version</dt>
-                  <dd class="col-sm-8">{{device.shadow.version}}</code></pre>
-                  </dd>
-                </dl>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="tab-pane fade show" id="principal" role="tabpanel" aria-labelledby="principal-tab">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-sm-6">
-                <table class="table table-hover table-sm">
-                  <thead>
-                    <tr>
-                      <th scope="col">certificates</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {{#each device.principals}}
-                    <tr>
-                      <td>{{this}}</td>
-                    </tr>
-                    {{/each}}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="tab-pane fade show" id="job" role="tabpanel" aria-labelledby="job-tab">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-sm-10">
-                <table class="table table-hover table-sm">
-                  <thead>
-                    <tr>
-                      <th scope="col">Job</th>
-                      <th scope="col">Status</th>
-                      <th scope="col">Started at</th>
-                      <th scope="col">Queued at</th>
-                      <th scope="col">Execution number</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {{#each jobs.executionSummaries}}
-                    <tr>
-                      <td>{{jobId}}</td>
-                      <td>{{jobExecutionSummary.status}}</td>
-                      <td>{{jobExecutionSummary.startedAt}}</td>
-                      <td>{{jobExecutionSummary.queuedAt}}</td>
-                      <td>{{jobExecutionSummary.executionNumber}}</td>
-                    </tr>
-                    {{/each}}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="tab-pane fade show" id="log" role="tabpanel" aria-labelledby="log-tab">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-sm-11">
-                <table class="table table-hover table-sm">
-                  <thead>
-                    <tr>
-                      <th scope="col">timestamp</th>
-                      <th scope="col">log stream</th>
-                      <th scope="col">message</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {{#each logs.events}}
-                    <tr>
-                      <td><span style="font-size: 0.8rem;">{{timestamp}}</span></td>
-                      <td><span style="font-size: 0.8rem;">{{logStreamName}}</span></td>
-                      <td><span class="font-italic" style="font-size: 0.8rem;">{{message}}</span></td>
-                    </tr>
-                    {{/each}}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="tab-pane fade show" id="properties" role="tabpanel" aria-labelledby="properties-tab">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-sm-6">
-                <h4>Thing properties</h4>
-                <ul class="list-group list-group-flush">
-                  {{#each device.attributes}}
-                  <li class="list-group-item">{{@key}}: {{this}}</li>
-                  {{/each}}
-                </ul>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-sm-6">
-                <h4>Thing Type properties</h4>
-                <ul class="list-group list-group-flush">
-                  {{#each device.thingType.thingTypeProperties}}
-                  <li class="list-group-item">{{@key}}: {{this}}</li>
-                  {{/each}}
-                </ul>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-sm-6">
-                <h4>Thing Group properties</h4>
-                <ul class="list-group list-group-flush">
-                  {{#each device.thingGroups}}
-                  {{#each thingGroupProperties}}
-                  <li class="list-group-item">{{@key}}: {{this}}</li>
-                  {{/each}}
-                  {{/each}}
-                </ul>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-sm-6">
-
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
       </div>
+
+      <div class="tab-pane fade show" id="thing-type" role="tabpanel" aria-labelledby="thing-type-tab">
+        <div>
+          <div class="row">
+            <div class="col-sm-6">
+              <dl class="row">
+                <dt class="col-sm-3">Id</dt>
+                <dd class="col-sm-8">{{device.thingType.thingTypeId}}</dd>
+
+                <dt class="col-sm-3">Name</dt>
+                <dd class="col-sm-9">{{device.thingType.thingTypeName}}</dd>
+
+                <dt class="col-sm-3">Description</dt>
+                <dd class="col-sm-9">{{device.thingType.thingTypeProperties.thingTypeDescription}}</dd>
+
+                <dt class="col-sm-3">Created at</dt>
+                <dd class="col-sm-9">{{device.thingType.thingTypeMetadata.creationDate}}</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane fade show" id="thing-group" role="tabpanel" aria-labelledby="thing-group-tab">
+        <div>
+          {{#each device.thingGroups}}
+          <div class="row">
+            <div class="col-sm-6">
+              <dl class="row">
+                <dt class="col-sm-4">Id</dt>
+                <dd class="col-sm-8">{{thingGroupId}}</dd>
+
+                <dt class="col-sm-4">Name</dt>
+                <dd class="col-sm-8">{{thingGroupName}}</dd>
+
+                <dt class="col-sm-4">Description</dt>
+                <dd class="col-sm-8">{{thingGroupProperties.thingGroupDescription}}</dd>
+
+                <dt class="col-sm-4">Parent Group</dt>
+                <dd class="col-sm-8">{{thingGroupMetadata.parentGroupName}}</dd>
+
+                <dt class="col-sm-4">Created at</dt>
+                <dd class="col-sm-8">{{thingGroupMetadata.creationDate}}</dd>
+
+                <dt class="col-sm-4">Parent Thing Groups</dt>
+                <dd class="col-sm-8">
+                  {{#each thingGroupMetadata.rootToParentThingGroups}}
+                  <span class="badge badge-pill badge-primary">{{groupName}}</span>
+                  {{/each}}
+                </dd>
+              </dl>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+
+      <div class="tab-pane fade show" id="shadow" role="tabpanel" aria-labelledby="shadow-tab">
+        <div>
+          <div class="row">
+            <div class="col-sm-6">
+              <dl class="row">
+                <dt class="col-sm-4">State</dt>
+                <dd class="col-sm-8">
+                  <pre><code>{{toJSON device.shadow.state}}</code></pre>
+                </dd>
+
+                <dt class="col-sm-4">Metadata</dt>
+                <dd class="col-sm-8">
+                  <pre><code>{{toJSON device.shadow.metadata}}</code></pre>
+                </dd>
+
+                <dt class="col-sm-4">Version</dt>
+                <dd class="col-sm-8">{{device.shadow.version}}</code></pre>
+                </dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane fade show" id="principal" role="tabpanel" aria-labelledby="principal-tab">
+        <div>
+          <div class="row">
+            <div class="col-sm-6">
+              <table class="table table-hover table-sm">
+                <thead>
+                  <tr>
+                    <th scope="col">certificates</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each device.principals}}
+                  <tr>
+                    <td>{{this}}</td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane fade show" id="job" role="tabpanel" aria-labelledby="job-tab">
+        <div>
+          <div class="row">
+            <div class="col-sm-10">
+              <table class="table table-hover table-sm">
+                <thead>
+                  <tr>
+                    <th scope="col">Job</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Started at</th>
+                    <th scope="col">Queued at</th>
+                    <th scope="col">Execution number</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each jobs.executionSummaries}}
+                  <tr>
+                    <td>{{jobId}}</td>
+                    <td>{{jobExecutionSummary.status}}</td>
+                    <td>{{jobExecutionSummary.startedAt}}</td>
+                    <td>{{jobExecutionSummary.queuedAt}}</td>
+                    <td>{{jobExecutionSummary.executionNumber}}</td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane fade show" id="log" role="tabpanel" aria-labelledby="log-tab">
+        <div>
+          <div class="row">
+            <div class="col-sm-11">
+              <table class="table table-hover table-sm">
+                <thead>
+                  <tr>
+                    <th scope="col">timestamp</th>
+                    <th scope="col">log stream</th>
+                    <th scope="col">message</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each logs.events}}
+                  <tr>
+                    <td><span style="font-size: 0.8rem;">{{timestamp}}</span></td>
+                    <td><span style="font-size: 0.8rem;">{{logStreamName}}</span></td>
+                    <td><span class="font-italic" style="font-size: 0.8rem; word-break: break-all;">{{message}}</span></td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane fade show" id="properties" role="tabpanel" aria-labelledby="properties-tab">
+        <div>
+          <div class="row">
+            <div class="col-sm-6">
+              <h4>Thing properties</h4>
+              <ul class="list-group list-group-flush">
+                {{#each device.attributes}}
+                <li class="list-group-item">{{@key}}: {{this}}</li>
+                {{/each}}
+              </ul>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6">
+              <h4>Thing Type properties</h4>
+              <ul class="list-group list-group-flush">
+                {{#each device.thingType.thingTypeProperties}}
+                <li class="list-group-item">{{@key}}: {{this}}</li>
+                {{/each}}
+              </ul>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6">
+              <h4>Thing Group properties</h4>
+              <ul class="list-group list-group-flush">
+                {{#each device.thingGroups}}
+                {{#each thingGroupProperties}}
+                <li class="list-group-item">{{@key}}: {{this}}</li>
+                {{/each}}
+                {{/each}}
+              </ul>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6">
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
     </div>
   </div>
 </div>
